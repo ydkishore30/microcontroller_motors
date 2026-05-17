@@ -1,22 +1,20 @@
-#ifndef MOTOR_H
-#define MOTOR_H
-
+#pragma once
 #include <Arduino.h>
 
-// Motor class encapsulates two PWM outputs for a bidirectional DC motor.
 class Motor {
-  int pin_rpwm, pin_lpwm;
-  int ch_r, ch_l;
+private:
+  int pin_rpwm;
+  int pin_lpwm;
+  int ch_r;
+  int ch_l;
+
+  bool inverted = false;   // ✅ ADD THIS
 
 public:
   Motor(int rpwm, int lpwm, int chR, int chL);
 
-  // Initialize PWM channels and attach them to motor pins.
   void begin();
-
-  // Set motor speed in the range [-255, 255].
-  // Positive values drive forward, negative values drive backward.
   void setSpeed(int speed);
-};
 
-#endif
+  void setInverted(bool inv);  // ✅ ADD THIS
+};

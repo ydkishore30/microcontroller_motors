@@ -10,8 +10,8 @@
 #define ENC_L_B 27
 
 // Hardware pin assignments for the right motor and encoder
-#define R_RPWM 33
-#define R_LPWM 32
+#define R_RPWM 32
+#define R_LPWM 33
 #define ENC_R_A 34
 #define ENC_R_B 35
 
@@ -56,20 +56,58 @@ void setup() {
 }
 
 void loop() {
+  static unsigned long lastTime = 0;
+  static String inputBuffer = "";
+
   unsigned long now = millis();
   float dt = (now - lastTime) / 1000.0;
 
-  // Run the control loop at roughly 50 Hz to keep timing stable
+  // -----------------------------
+  // 1. Read Serial safely (non-blocking)
+  // -----------------------------
+  while (Serial.available() > 0) {
+    char c = Serial.read();
+
+    if (c == '\n') {
+      inputBuffer.trim();
+
+      float linear = 0;
+      float angular = 0;
+
+      int spaceIndex = inputBuffer.indexOf(' ');
+
+      if (spaceIndex > 0) {
+        linear = inputBuffer.substring(0, spaceIndex).toFloat();
+        angular = inputBuffer.substring(spaceIndex + 1).toFloat();
+      }
+
+      // Apply command immediately
+      drive.setVelocity(linear, angular, dt);
+
+      inputBuffer = "";  // clear buffer
+    } else {
+      inputBuffer += c;
+    }
+  }
+
+  // -----------------------------
+  // 2. Run control loop at 50Hz
+  // -----------------------------
   if (dt >= 0.02) {
     lastTime = now;
 
-    // Example: send a velocity command to the differential drive
-    // drive.setVelocity(100.0, 0.0, dt);
+    // -----------------------------
+    // 3. Slow debug output (IMPORTANT FIX)
+    // -----------------------------
+    static int counter = 0;
+    counter++;
 
-    // Print encoder ticks for debugging and performance monitoring
-    Serial.print("L: ");
-    Serial.print(leftEncoder.getTicks());
-    Serial.print(" R: ");
-    Serial.println(rightEncoder.getTicks());
+    if (counter % 20 == 0) {   // prints every ~0.4 sec
+      Serial.print("L:");
+      Serial.print(leftEncoder.getTicks());
+
+      Serial.print(" R:");
+      Serial.println(rightEncoder.getTicks());
+    }
   }
 }
