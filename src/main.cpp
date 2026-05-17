@@ -1,68 +1,75 @@
-#include <Arduino.h>
+#include "hal/Motor.h"
+#include "hal/Encoder.h"
+#include "control/MotorController.h"
+#include "kinematics/DifferentialDrive.h"
 
-// LEFT motor pins only
+// Hardware pin assignments for the left motor and encoder
 #define L_RPWM 25
 #define L_LPWM 26
-
-// LEFT encoder only
 #define ENC_L_A 14
 #define ENC_L_B 27
 
-volatile long left_ticks = 0;
+// Hardware pin assignments for the right motor and encoder
+#define R_RPWM 33
+#define R_LPWM 32
+#define ENC_R_A 34
+#define ENC_R_B 35
 
-// ISR
-void IRAM_ATTR ISR_left() {
-  left_ticks++;
+// Motor objects encapsulate PWM channel setup and direction control
+Motor leftMotor(L_RPWM, L_LPWM, 0, 1);
+Motor rightMotor(R_RPWM, R_LPWM, 2, 3);
+
+// Encoder objects manage tick counting from quadrature sensors
+Encoder leftEncoder(ENC_L_A, ENC_L_B);
+Encoder rightEncoder(ENC_R_A, ENC_R_B);
+
+// Motor controllers combine motor output and encoder feedback
+MotorController leftController(leftMotor, leftEncoder);
+MotorController rightController(rightMotor, rightEncoder);
+
+// Differential drive wrapper converts velocity commands into left/right wheel outputs
+DifferentialDrive drive(leftController, rightController);
+
+// Interrupt service routines must be short and only update encoder state
+void IRAM_ATTR isrLeft() {
+  leftEncoder.handleA();
 }
 
-// PWM channels
-#define CH_L_RPWM 0
-#define CH_L_LPWM 1
-
-void setupPWM() {
-  ledcSetup(CH_L_RPWM, 2000, 8);
-  ledcSetup(CH_L_LPWM, 2000, 8);
-
-  ledcAttachPin(L_RPWM, CH_L_RPWM);
-  ledcAttachPin(L_LPWM, CH_L_LPWM);
+void IRAM_ATTR isrRight() {
+  rightEncoder.handleA();
 }
 
-void setMotor(int speed) {
-  speed = constrain(speed, -255, 255);
-
-  if (speed >= 0) {
-    ledcWrite(CH_L_RPWM, speed);
-    ledcWrite(CH_L_LPWM, 0);
-  } else {
-    ledcWrite(CH_L_RPWM, 0);
-    ledcWrite(CH_L_LPWM, -speed);
-  }
-}
+unsigned long lastTime = 0;
 
 void setup() {
   Serial.begin(115200);
 
-  pinMode(ENC_L_A, INPUT_PULLUP);
-  pinMode(ENC_L_B, INPUT_PULLUP);
+  // Initialize motor PWM channels before use
+  leftMotor.begin();
+  rightMotor.begin();
 
-  attachInterrupt(digitalPinToInterrupt(ENC_L_A), ISR_left, RISING);
+  // Initialize encoder pins and attach interrupts
+  leftEncoder.begin(isrLeft);
+  rightEncoder.begin(isrRight);
 
-  setupPWM();
+  lastTime = millis();
 }
 
 void loop() {
-  // Forward
-  setMotor(150);
-  delay(2000);
+  unsigned long now = millis();
+  float dt = (now - lastTime) / 1000.0;
 
-  // Stop
-  setMotor(0);
-  delay(1000);
+  // Run the control loop at roughly 50 Hz to keep timing stable
+  if (dt >= 0.02) {
+    lastTime = now;
 
-  noInterrupts();
-  long ticks = left_ticks;
-  interrupts();
+    // Example: send a velocity command to the differential drive
+    // drive.setVelocity(100.0, 0.0, dt);
 
-  Serial.print("Left Ticks: ");
-  Serial.println(ticks);
+    // Print encoder ticks for debugging and performance monitoring
+    Serial.print("L: ");
+    Serial.print(leftEncoder.getTicks());
+    Serial.print(" R: ");
+    Serial.println(rightEncoder.getTicks());
+  }
 }
