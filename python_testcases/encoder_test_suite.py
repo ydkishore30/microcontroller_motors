@@ -1,127 +1,138 @@
-from robot import Robot
 import time
+import csv
+import matplotlib.pyplot as plt
+from robot import Robot
+from tests import RobotTests
 
+# ---------------- INIT ----------------
 robot = Robot()
+tests = RobotTests()
 
-# ---------------------------
-# Helper: read encoder line
-# ---------------------------
-def read_sample(n=20, delay=0.05):
+# ---------------- TEST LIST ----------------
+test_list = [
+    ("forward", tests.test_forward),
+    ("backward", tests.test_backward),
+    ("turn_left", tests.test_turn_left),
+    ("turn_right", tests.test_turn_right),
+    ("ramp", tests.test_ramp)
+]
+
+# ---------------- FILES ----------------
+log_file = open("logs.txt", "w")
+csv_file = open("encoder_log.csv", "w", newline="")
+writer = csv.writer(csv_file)
+
+writer.writerow(["test", "time", "left", "right"])
+
+# ---------------- PARSER ----------------
+def parse(line):
+    """
+    Supports:
+    - 123,456
+    - L:123 R:456
+    """
+
+    try:
+        line = line.strip()
+
+        if "," in line and "L" not in line:
+            l, r = line.split(",")
+            return int(l), int(r)
+
+        if "L:" in line and "R:" in line:
+            line = line.replace("L:", "").replace("R:", "")
+            parts = line.split()
+            return int(parts[0]), int(parts[1])
+
+    except:
+        return None
+
+    return None
+
+# ---------------- DATA COLLECT ----------------
+def collect_data(test_name, duration=2.0):
+
+    start = time.time()
     data = []
-    for _ in range(n):
+
+    while time.time() - start < duration:
+
         line = robot.read()
-        if line:
-            data.append(line)
-        time.sleep(delay)
+
+        if not line:
+            continue
+
+        parsed = parse(line)
+
+        if parsed is None:
+            continue
+
+        l, r = parsed
+        t = time.time() - start
+
+        writer.writerow([test_name, t, l, r])
+        data.append((t, l, r))
+
     return data
 
+# ---------------- PLOT FUNCTION ----------------
+def plot_all(data_map):
 
-# ---------------------------
-# TEST 1: Noise Test (motor OFF)
-# ---------------------------
-def test_noise():
-    print("\n=== TEST 1: Noise Test ===")
+    plt.figure()
 
-    robot.send(0, 0)
-    time.sleep(2)
+    for name, data in data_map.items():
 
-    start = robot.read()
-    time.sleep(2)
-    end = robot.read()
+        if len(data) == 0:
+            continue
 
-    print("Start:", start)
-    print("End  :", end)
+        t = [d[0] for d in data]
+        l = [d[1] for d in data]
+        r = [d[2] for d in data]
 
-    print("→ Check: should NOT change much\n")
+        plt.plot(t, l, label=f"{name} L")
+        plt.plot(t, r, linestyle="--", label=f"{name} R")
 
+    plt.xlabel("Time (s)")
+    plt.ylabel("Encoder Ticks")
+    plt.title("Robot Encoder Test Results")
+    plt.legend()
+    plt.grid()
 
-# ---------------------------
-# TEST 2: Tick consistency (manual rotation)
-# ---------------------------
-def test_tick_consistency():
-    print("\n=== TEST 2: Tick Consistency ===")
+    plt.show()
 
-    print("Rotate wheel slowly by hand...")
-
-    samples = read_sample(30, 0.1)
-
-    for s in samples:
-        print(s)
-
-    print("→ Check: smooth incremental change (no jumps)\n")
-
-
-# ---------------------------
-# TEST 3: Forward symmetry
-# ---------------------------
-def test_forward_symmetry():
-    print("\n=== TEST 3: Forward Symmetry ===")
-
-    robot.send(100, 100)
-    time.sleep(3)
-    robot.send(0, 0)
-
-    samples = read_sample(20)
-
-    for s in samples:
-        print(s)
-
-    print("→ Check: L ≈ R\n")
-
-
-# ---------------------------
-# TEST 4: Reverse symmetry
-# ---------------------------
-def test_reverse_symmetry():
-    print("\n=== TEST 4: Reverse Symmetry ===")
-
-    robot.send(-100, -100)
-    time.sleep(3)
-    robot.send(0, 0)
-
-    samples = read_sample(20)
-
-    for s in samples:
-        print(s)
-
-    print("→ Check: L ≈ R (negative trend)\n")
-
-
-# ---------------------------
-# TEST 5: Rotation test
-# ---------------------------
-def test_rotation():
-    print("\n=== TEST 5: Rotation Test ===")
-
-    robot.send(-100, 100)
-    time.sleep(2)
-    robot.send(0, 0)
-
-    samples = read_sample(20)
-
-    for s in samples:
-        print(s)
-
-    print("→ Check: L and R opposite signs\n")
-
-
-# ---------------------------
-# TEST RUNNER
-# ---------------------------
+# ---------------- MAIN LOOP ----------------
 if __name__ == "__main__":
 
-    test_noise()
-    time.sleep(2)
+    results = {}
 
-    test_tick_consistency()
-    time.sleep(2)
+    for name, test in test_list:
 
-    test_forward_symmetry()
-    time.sleep(2)
+        print("\n======================")
+        print("Running:", name)
+        print("======================")
 
-    test_reverse_symmetry()
-    time.sleep(2)
+        # 1. run motion
+        result = test(robot)
 
-    test_rotation()
+        # 2. collect encoder data
+        data = collect_data(name, 2.0)
+        results[name] = data
 
+        # 3. log summary
+        log = f"{name} -> {result} | samples={len(data)}"
+        print(log)
+
+        log_file.write(log + "\n")
+
+        time.sleep(1)
+
+    # ---------------- STOP ROBOT ----------------
+    robot.stop()
     robot.close()
+
+    log_file.close()
+    csv_file.close()
+
+    # ---------------- PLOT ----------------
+    print("\nPlotting results...")
+    plot_all(results)

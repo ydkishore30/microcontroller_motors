@@ -21,7 +21,7 @@ void Encoder::handleA() {
 long Encoder::getTicks() {
   // Safely read the tick count without interruption while copying.
   noInterrupts();
-  long t = ticks;
+  long t = -ticks;
   interrupts();
   return t;
 }

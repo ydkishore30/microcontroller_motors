@@ -1,5 +1,0 @@
-forward -> L:5248 R:-1246 | samples=17
-backward -> L:3967 R:-2501 | samples=14
-turn_left -> L:5256 R:-1260 | samples=14
-turn_right -> L:6284 R:-2245 | samples=14
-ramp -> L:5266 R:-1269 | samples=16
