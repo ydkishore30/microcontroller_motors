@@ -2,6 +2,8 @@
 #include "hal/Encoder.h"
 #include "control/MotorController.h"
 
+#include "kinematics/DifferentialDrive.h"
+
 // LEFT MOTOR
 #define L_RPWM 25
 #define L_LPWM 26
@@ -23,8 +25,21 @@ Encoder rightEncoder(ENC_R_A, ENC_R_B);
 void IRAM_ATTR isrLeft() { leftEncoder.handleA(); }
 void IRAM_ATTR isrRight() { rightEncoder.handleA(); }
 
+// Motor controllers (wrap motor + encoder)
+MotorController leftController(leftMotor, leftEncoder);
+MotorController rightController(rightMotor, rightEncoder);
+
+// Differential drive
+DifferentialDrive drive(leftController, rightController);
+
 unsigned long lastTime = 0;
 
+// ==============================
+// GLOBAL STATE
+// ==============================
+
+float linear = 0.0f;
+float angular = 0.0f;
 // stored commands (IMPORTANT)
 int cmdL = 0;
 int cmdR = 0;
@@ -38,6 +53,7 @@ void setup() {
   leftEncoder.begin(isrLeft);
   rightEncoder.begin(isrRight);
 
+  
   Serial.println("READY");
 }
 
@@ -45,8 +61,11 @@ void loop() {
 
   // -------------------------
   // 1. READ SERIAL COMMAND
-  // format: "L R"
+  // format: "linear angular"
+  // example: "100 0" (forward)
+  //          "0 50"  (rotate)
   // -------------------------
+
   static String input = "";
 
   while (Serial.available()) {
@@ -59,8 +78,8 @@ void loop() {
       int space = input.indexOf(' ');
 
       if (space > 0) {
-        cmdL = input.substring(0, space).toInt();
-        cmdR = input.substring(space + 1).toInt();
+        linear  = input.substring(0, space).toFloat();
+        angular = input.substring(space + 1).toFloat();
       }
 
       input = "";
@@ -70,21 +89,39 @@ void loop() {
   }
 
   // -------------------------
-  // 2. APPLY MOTOR OUTPUT
+  // 2. COMPUTE dt
   // -------------------------
-  leftMotor.setSpeed(cmdL);
-  rightMotor.setSpeed(cmdR);
+  unsigned long now = millis();
+  float dt = (now - lastTime) / 1000.0f;
+  lastTime = now;
+
+  // Safety fallback
+  if (dt <= 0) dt = 0.01f;
 
   // -------------------------
-  // 3. DEBUG (slow)
-  // -------------------------  
+  // 3. APPLY DIFFERENTIAL DRIVE
+  // -------------------------
+
+  drive.setVelocity(linear, angular, dt);
+
+  // -------------------------
+  // 4. DEBUG OUTPUT
+  // -------------------------
+
   static int counter = 0;
   counter++;
 
   if (counter % 50 == 0) {
-    Serial.print("L:");
+    Serial.print("L ticks: ");
     Serial.print(leftEncoder.getTicks());
-    Serial.print(" R:");
-    Serial.println(rightEncoder.getTicks());
+
+    Serial.print(" | R ticks: ");
+    Serial.print(rightEncoder.getTicks());
+
+    Serial.print(" | Lin: ");
+    Serial.print(linear);
+
+    Serial.print(" | Ang: ");
+    Serial.println(angular);
   }
 }
