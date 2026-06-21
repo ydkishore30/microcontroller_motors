@@ -24,3 +24,8 @@ void MotorController::setOpenLoop(float speed) {
   // Bypass PID and drive the motor directly
   motor.setSpeed(speed);
 }
+
+void MotorController::stop() {
+  controller.reset();
+  motor.setSpeed(0.0f);
+}

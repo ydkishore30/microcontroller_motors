@@ -28,6 +28,10 @@ public:
 
   // Set raw motor power without feedback control.
   void setOpenLoop(float speed);
+
+  // Clear controller state (e.g. PID integral) and stop the motor
+  // immediately, instead of letting leftover correction unwind.
+  void stop();
 };
 
 #endif

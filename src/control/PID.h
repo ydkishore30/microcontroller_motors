@@ -11,6 +11,7 @@ class PID : public IController {
 public:
   PID(float p, float i, float d);
   float compute(float target, float current, float dt) override;
+  void reset() override;
 };
 
 #endif

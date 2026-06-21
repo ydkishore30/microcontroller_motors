@@ -22,3 +22,8 @@ float PID::compute(float target, float current, float dt) {
 
   return output;
 }
+
+void PID::reset() {
+  integral = 0;
+  prevError = 0;
+}

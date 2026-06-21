@@ -43,11 +43,13 @@ void IRAM_ATTR isrRight() {
 
 // Gains scaled for ticks/sec-magnitude error (target/current speed are
 // in ticks/sec, output must land in [-1, 1] for Motor::setSpeed).
-// Starting as pure P (I=D=0) deliberately: D on quantized/noisy encoder
-// feedback caused oscillation, and I/D should only be added back in
-// small increments after P alone is confirmed stable on real hardware.
-PID leftPid(0.0007, 0.0, 0.0);
-PID rightPid(0.0007, 0.0, 0.0);
+// Pure-P (kp=0.0007) was confirmed stable but settled ~55-60% under the
+// commanded speed (steady-state error with no I term). Adding a small
+// ki - 5x smaller than the 0.0005 that previously caused oscillation -
+// to close that gap. kd stays at 0: D on quantized encoder feedback was
+// the main cause of the earlier instability.
+PID leftPid(0.0007, 0.0001, 0.0);
+PID rightPid(0.0007, 0.0001, 0.0);
 
 MotorController leftController(leftMotor, leftEncoder, leftPid);
 MotorController rightController(rightMotor, rightEncoder, rightPid);
@@ -106,11 +108,23 @@ void loop() {
     float dt = (now - lastUpdate) / 1000.0f;
     lastUpdate = now;
 
-    float targetLeft = commandSource.getLeftCommand() * MAX_WHEEL_SPEED_TICKS_PER_SEC;
-    float targetRight = commandSource.getRightCommand() * MAX_WHEEL_SPEED_TICKS_PER_SEC;
+    float leftCommand = commandSource.getLeftCommand();
+    float rightCommand = commandSource.getRightCommand();
 
-    leftController.update(targetLeft, dt);
-    rightController.update(targetRight, dt);
+    // A zero command means stop, not "target speed 0 ticks/sec" - the
+    // latter would let any leftover PID integral keep weakly driving
+    // the motor until it naturally unwinds. Reset and cut power instead.
+    if (leftCommand == 0.0f) {
+      leftController.stop();
+    } else {
+      leftController.update(leftCommand * MAX_WHEEL_SPEED_TICKS_PER_SEC, dt);
+    }
+
+    if (rightCommand == 0.0f) {
+      rightController.stop();
+    } else {
+      rightController.update(rightCommand * MAX_WHEEL_SPEED_TICKS_PER_SEC, dt);
+    }
   }
 
   // ==========================
