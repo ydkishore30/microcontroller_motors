@@ -34,5 +34,5 @@ private:
   float gyroX = 0, gyroY = 0, gyroZ = 0;
   float temperature = 0;
 
-  void writeRegister(uint8_t reg, uint8_t value);
+  bool writeRegister(uint8_t reg, uint8_t value);
 };

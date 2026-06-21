@@ -23,17 +23,49 @@ bool MPU6050::begin() {
   uint8_t whoAmI = Wire.read();
   if ((whoAmI & 0x7E) != 0x68) return false;
 
-  writeRegister(REG_PWR_MGMT_1, 0x00); // wake up device
+  if (!writeRegister(REG_PWR_MGMT_1, 0x00)) return false; // wake up device
+
+  // MPU6050 needs time to stabilize after leaving sleep mode before
+  // ACCEL/GYRO registers report real samples instead of stale zeros.
+  delay(50);
+
+  // Verify the wake-up write actually stuck, not just that it was ACKed.
+  Wire.beginTransmission(address);
+  Wire.write(REG_PWR_MGMT_1);
+  Wire.endTransmission(false);
+  Wire.requestFrom(address, (uint8_t)1);
+  uint8_t pwrMgmt1 = Wire.available() ? Wire.read() : 0xFF;
+
+  Serial.print("IMU begin OK: whoAmI=0x");
+  Serial.print(whoAmI, HEX);
+  Serial.print(" pwrMgmt1=0x");
+  Serial.println(pwrMgmt1, HEX);
+
   return true;
 }
 
 void MPU6050::update() {
   Wire.beginTransmission(address);
   Wire.write(REG_ACCEL_XOUT_H);
-  Wire.endTransmission(false);
-  Wire.requestFrom(address, (uint8_t)14);
+  uint8_t txStatus = Wire.endTransmission(false);
+  uint8_t received = Wire.requestFrom(address, (uint8_t)14);
 
-  if (Wire.available() < 14) return;
+  bool ok = (txStatus == 0 && Wire.available() >= 14);
+
+  static unsigned long lastLog = 0;
+  if (millis() - lastLog > 1000) {
+    lastLog = millis();
+    Serial.print("IMU status: ");
+    Serial.print(ok ? "OK" : "FAIL");
+    Serial.print(" txStatus=");
+    Serial.print(txStatus);
+    Serial.print(" requested=14 received=");
+    Serial.print(received);
+    Serial.print(" available=");
+    Serial.println(Wire.available());
+  }
+
+  if (!ok) return;
 
   int16_t rawAccelX = (Wire.read() << 8) | Wire.read();
   int16_t rawAccelY = (Wire.read() << 8) | Wire.read();
@@ -65,9 +97,9 @@ float MPU6050::getGyroZ() const { return gyroZ; }
 
 float MPU6050::getTemperature() const { return temperature; }
 
-void MPU6050::writeRegister(uint8_t reg, uint8_t value) {
+bool MPU6050::writeRegister(uint8_t reg, uint8_t value) {
   Wire.beginTransmission(address);
   Wire.write(reg);
   Wire.write(value);
-  Wire.endTransmission();
+  return Wire.endTransmission() == 0;
 }

@@ -2,26 +2,14 @@
 #include "hal/Encoder.h"
 #include "hal/MPU6050.h"
 #include "hal/INA226.h"
+#include "hal/I2CBusRecovery.h"
 #include "control/MotorController.h"
 #include "control/PID.h"
 #include "comms/ICommandSource.h"
 #include "comms/ITelemetryPublisher.h"
-#include "Config.h"
-
-#ifdef USE_MICRO_ROS
-#include "comms/MicroRosNode.h"
-#include "comms/MicroRosCommandSource.h"
-#include "comms/MicroRosTelemetryPublisher.h"
-#ifdef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
-#include "comms/MicroRosSerialTransport.h"
-#else
-#include "comms/MicroRosWifiTransport.h"
-#include "RuntimeConfig.h"
-#endif
-#else
 #include "comms/SerialCommandSource.h"
 #include "comms/SerialTelemetryPublisher.h"
-#endif
+#include "Config.h"
 
 // LEFT MOTOR
 #define L_RPWM 25
@@ -34,6 +22,10 @@
 #define R_LPWM 16
 #define ENC_R_A 18
 #define ENC_R_B 19
+
+// I2C bus (shared by MPU6050 and INA226)
+#define I2C_SDA 21
+#define I2C_SCL 22
 
 Motor leftMotor(L_RPWM, L_LPWM, 0, 1);
 Motor rightMotor(R_RPWM, R_LPWM, 2, 3);
@@ -49,8 +41,13 @@ void IRAM_ATTR isrRight() {
   rightEncoder.handleA();
 }
 
-PID leftPid(1.0, 0.0, 0.1);
-PID rightPid(1.0, 0.0, 0.1);
+// Gains scaled for ticks/sec-magnitude error (target/current speed are
+// in ticks/sec, output must land in [-1, 1] for Motor::setSpeed).
+// Starting as pure P (I=D=0) deliberately: D on quantized/noisy encoder
+// feedback caused oscillation, and I/D should only be added back in
+// small increments after P alone is confirmed stable on real hardware.
+PID leftPid(0.0007, 0.0, 0.0);
+PID rightPid(0.0007, 0.0, 0.0);
 
 MotorController leftController(leftMotor, leftEncoder, leftPid);
 MotorController rightController(rightMotor, rightEncoder, rightPid);
@@ -58,23 +55,8 @@ MotorController rightController(rightMotor, rightEncoder, rightPid);
 MPU6050 imu;
 INA226 currentSensor;
 
-// Comms transport - selected at compile time. The rest of setup()/loop()
-// only ever touches the ICommandSource/ITelemetryPublisher interfaces,
-// so swapping transports requires no changes below.
-#ifdef USE_MICRO_ROS
-MicroRosNode microRosNode(1); // 1 executor handle: the wheel_cmd subscription
-MicroRosCommandSource concreteCommandSource(microRosNode);
-MicroRosTelemetryPublisher concreteTelemetryPublisher(microRosNode);
-#ifdef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
-MicroRosSerialTransport microRosTransport(Serial);
-#else
-MicroRosWifiTransport microRosTransport;
-RuntimeConfig runtimeConfig;
-#endif
-#else
 SerialCommandSource concreteCommandSource;
 SerialTelemetryPublisher concreteTelemetryPublisher;
-#endif
 
 ICommandSource& commandSource = concreteCommandSource;
 ITelemetryPublisher& telemetryPublisher = concreteTelemetryPublisher;
@@ -88,6 +70,7 @@ void setup() {
   leftEncoder.begin(isrLeft);
   rightEncoder.begin(isrRight);
 
+  recoverI2CBus(I2C_SDA, I2C_SCL);
   Wire.begin();
 
   if (!imu.begin()) {
@@ -98,20 +81,6 @@ void setup() {
     Serial.println("Current sensor init failed");
   }
 
-#ifdef USE_MICRO_ROS
-#ifdef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
-  microRosNode.begin(microRosTransport, "motor_controller_node");
-#else
-  if (!runtimeConfig.load()) {
-    runtimeConfig.promptAndWaitForSerialConfig(); // blocks, then restarts
-  }
-
-  microRosTransport.configure(runtimeConfig.getSsid(), runtimeConfig.getPassword(),
-                               runtimeConfig.getAgentIp(), runtimeConfig.getAgentPort());
-  microRosNode.begin(microRosTransport, "motor_controller_node");
-#endif
-#endif
-
   commandSource.begin();
   telemetryPublisher.begin();
 }
@@ -120,19 +89,29 @@ void loop() {
 
   commandSource.poll();
 
-#ifdef USE_MICRO_ROS
-#ifndef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
-  runtimeConfig.poll(); // allows re-provisioning via "CONFIG ..." at any time
-#endif
-  microRosNode.spinSome(10);
-#endif
-
   // ==========================
-  // OPEN LOOP MOTOR CONTROL
+  // CLOSED LOOP VELOCITY CONTROL
+  // Command is normalized [-1, 1]; scaled to a target speed in
+  // ticks/sec and tracked via PID using encoder feedback. Rate-limited
+  // to a fixed interval so dt stays consistent - calling this every raw
+  // loop() iteration (dt of a few ms) makes the PID's derivative term
+  // amplify encoder noise into large, unstable output swings.
   // ==========================
 
-  leftController.setOpenLoop(commandSource.getLeftCommand());
-  rightController.setOpenLoop(commandSource.getRightCommand());
+  const unsigned long CONTROL_INTERVAL_MS = 100;
+  static unsigned long lastUpdate = 0;
+  unsigned long now = millis();
+
+  if (now - lastUpdate >= CONTROL_INTERVAL_MS) {
+    float dt = (now - lastUpdate) / 1000.0f;
+    lastUpdate = now;
+
+    float targetLeft = commandSource.getLeftCommand() * MAX_WHEEL_SPEED_TICKS_PER_SEC;
+    float targetRight = commandSource.getRightCommand() * MAX_WHEEL_SPEED_TICKS_PER_SEC;
+
+    leftController.update(targetLeft, dt);
+    rightController.update(targetRight, dt);
+  }
 
   // ==========================
   // SENSORS
