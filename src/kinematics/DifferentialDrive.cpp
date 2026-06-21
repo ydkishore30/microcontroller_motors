@@ -1,4 +1,5 @@
 #include "DifferentialDrive.h"
+#include <Arduino.h>
 
 DifferentialDrive::DifferentialDrive(MotorController& l, MotorController& r)
   : left(l), right(r) {}

@@ -1,20 +1,39 @@
 #include "hal/Motor.h"
 #include "hal/Encoder.h"
+#include "hal/MPU6050.h"
+#include "hal/INA226.h"
 #include "control/MotorController.h"
+#include "control/PID.h"
+#include "comms/ICommandSource.h"
+#include "comms/ITelemetryPublisher.h"
+#include "Config.h"
 
-#include "kinematics/DifferentialDrive.h"
+#ifdef USE_MICRO_ROS
+#include "comms/MicroRosNode.h"
+#include "comms/MicroRosCommandSource.h"
+#include "comms/MicroRosTelemetryPublisher.h"
+#ifdef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
+#include "comms/MicroRosSerialTransport.h"
+#else
+#include "comms/MicroRosWifiTransport.h"
+#include "RuntimeConfig.h"
+#endif
+#else
+#include "comms/SerialCommandSource.h"
+#include "comms/SerialTelemetryPublisher.h"
+#endif
 
 // LEFT MOTOR
 #define L_RPWM 25
 #define L_LPWM 26
-#define ENC_L_A 14
-#define ENC_L_B 27
+#define ENC_L_A 32
+#define ENC_L_B 33
 
 // RIGHT MOTOR
-#define R_RPWM 32
-#define R_LPWM 33
-#define ENC_R_A 35
-#define ENC_R_B 34
+#define R_RPWM 4
+#define R_LPWM 16
+#define ENC_R_A 18
+#define ENC_R_B 19
 
 Motor leftMotor(L_RPWM, L_LPWM, 0, 1);
 Motor rightMotor(R_RPWM, R_LPWM, 2, 3);
@@ -22,27 +41,43 @@ Motor rightMotor(R_RPWM, R_LPWM, 2, 3);
 Encoder leftEncoder(ENC_L_A, ENC_L_B);
 Encoder rightEncoder(ENC_R_A, ENC_R_B);
 
-void IRAM_ATTR isrLeft() { leftEncoder.handleA(); }
-void IRAM_ATTR isrRight() { rightEncoder.handleA(); }
+void IRAM_ATTR isrLeft() {
+  leftEncoder.handleA();
+}
 
-// Motor controllers (wrap motor + encoder)
-MotorController leftController(leftMotor, leftEncoder);
-MotorController rightController(rightMotor, rightEncoder);
+void IRAM_ATTR isrRight() {
+  rightEncoder.handleA();
+}
 
-// Differential drive
-DifferentialDrive drive(leftController, rightController);
+PID leftPid(1.0, 0.0, 0.1);
+PID rightPid(1.0, 0.0, 0.1);
 
-unsigned long lastTime = 0;
+MotorController leftController(leftMotor, leftEncoder, leftPid);
+MotorController rightController(rightMotor, rightEncoder, rightPid);
 
-// ==============================
-// GLOBAL STATE
-// ==============================
+MPU6050 imu;
+INA226 currentSensor;
 
-float linear = 0.0f;
-float angular = 0.0f;
-// stored commands (IMPORTANT)
-int cmdL = 0;
-int cmdR = 0;
+// Comms transport - selected at compile time. The rest of setup()/loop()
+// only ever touches the ICommandSource/ITelemetryPublisher interfaces,
+// so swapping transports requires no changes below.
+#ifdef USE_MICRO_ROS
+MicroRosNode microRosNode(1); // 1 executor handle: the wheel_cmd subscription
+MicroRosCommandSource concreteCommandSource(microRosNode);
+MicroRosTelemetryPublisher concreteTelemetryPublisher(microRosNode);
+#ifdef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
+MicroRosSerialTransport microRosTransport(Serial);
+#else
+MicroRosWifiTransport microRosTransport;
+RuntimeConfig runtimeConfig;
+#endif
+#else
+SerialCommandSource concreteCommandSource;
+SerialTelemetryPublisher concreteTelemetryPublisher;
+#endif
+
+ICommandSource& commandSource = concreteCommandSource;
+ITelemetryPublisher& telemetryPublisher = concreteTelemetryPublisher;
 
 void setup() {
   Serial.begin(115200);
@@ -53,75 +88,65 @@ void setup() {
   leftEncoder.begin(isrLeft);
   rightEncoder.begin(isrRight);
 
-  
-  Serial.println("READY");
+  Wire.begin();
+
+  if (!imu.begin()) {
+    Serial.println("IMU init failed");
+  }
+
+  if (!currentSensor.begin(SHUNT_RESISTOR_OHMS, MAX_EXPECTED_CURRENT_A)) {
+    Serial.println("Current sensor init failed");
+  }
+
+#ifdef USE_MICRO_ROS
+#ifdef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
+  microRosNode.begin(microRosTransport, "motor_controller_node");
+#else
+  if (!runtimeConfig.load()) {
+    runtimeConfig.promptAndWaitForSerialConfig(); // blocks, then restarts
+  }
+
+  microRosTransport.configure(runtimeConfig.getSsid(), runtimeConfig.getPassword(),
+                               runtimeConfig.getAgentIp(), runtimeConfig.getAgentPort());
+  microRosNode.begin(microRosTransport, "motor_controller_node");
+#endif
+#endif
+
+  commandSource.begin();
+  telemetryPublisher.begin();
 }
 
 void loop() {
 
-  // -------------------------
-  // 1. READ SERIAL COMMAND
-  // format: "linear angular"
-  // example: "100 0" (forward)
-  //          "0 50"  (rotate)
-  // -------------------------
+  commandSource.poll();
 
-  static String input = "";
+#ifdef USE_MICRO_ROS
+#ifndef MICRO_ROS_TRANSPORT_ARDUINO_SERIAL
+  runtimeConfig.poll(); // allows re-provisioning via "CONFIG ..." at any time
+#endif
+  microRosNode.spinSome(10);
+#endif
 
-  while (Serial.available()) {
-    char c = Serial.read();
+  // ==========================
+  // OPEN LOOP MOTOR CONTROL
+  // ==========================
 
-    if (c == '\n') {
+  leftController.setOpenLoop(commandSource.getLeftCommand());
+  rightController.setOpenLoop(commandSource.getRightCommand());
 
-      input.trim();
+  // ==========================
+  // SENSORS
+  // ==========================
 
-      int space = input.indexOf(' ');
+  imu.update();
+  currentSensor.update();
 
-      if (space > 0) {
-        linear  = input.substring(0, space).toFloat();
-        angular = input.substring(space + 1).toFloat();
-      }
+  // ==========================
+  // TELEMETRY
+  // ==========================
 
-      input = "";
-    } else {
-      input += c;
-    }
-  }
-
-  // -------------------------
-  // 2. COMPUTE dt
-  // -------------------------
-  unsigned long now = millis();
-  float dt = (now - lastTime) / 1000.0f;
-  lastTime = now;
-
-  // Safety fallback
-  if (dt <= 0) dt = 0.01f;
-
-  // -------------------------
-  // 3. APPLY DIFFERENTIAL DRIVE
-  // -------------------------
-
-  drive.setVelocity(linear, angular, dt);
-
-  // -------------------------
-  // 4. DEBUG OUTPUT
-  // -------------------------
-
-  static int counter = 0;
-  counter++;
-
-  if (counter % 50 == 0) {
-    Serial.print("L ticks: ");
-    Serial.print(leftEncoder.getTicks());
-
-    Serial.print(" | R ticks: ");
-    Serial.print(rightEncoder.getTicks());
-
-    Serial.print(" | Lin: ");
-    Serial.print(linear);
-
-    Serial.print(" | Ang: ");
-    Serial.println(angular);
-  }
+  telemetryPublisher.publish(
+    leftEncoder.getTicks(), rightEncoder.getTicks(),
+    commandSource.getLeftCommand(), commandSource.getRightCommand(),
+    imu, currentSensor);
 }

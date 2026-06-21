@@ -1,7 +1,8 @@
 #pragma once
 #include <Arduino.h>
+#include "IMotor.h"
 
-class Motor {
+class Motor : public IMotor {
 private:
   int pin_rpwm;
   int pin_lpwm;
@@ -14,7 +15,7 @@ public:
   Motor(int rpwm, int lpwm, int chR, int chL);
 
   void begin();
-  void setSpeed(int speed);
+  void setSpeed(float speed) override;
 
   void setInverted(bool inv);  // ✅ ADD THIS
 };

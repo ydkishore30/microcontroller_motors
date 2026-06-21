@@ -1,7 +1,7 @@
 #include "MotorController.h"
 
-MotorController::MotorController(Motor& m, Encoder& e)
-  : motor(m), encoder(e), pid(1.0, 0.0, 0.1) {}
+MotorController::MotorController(IMotor& m, IEncoder& e, IController& c)
+  : motor(m), encoder(e), controller(c) {}
 
 float MotorController::getSpeed(float dt) {
   long ticks = encoder.getTicks();
@@ -14,13 +14,13 @@ float MotorController::getSpeed(float dt) {
 
 void MotorController::update(float targetSpeed, float dt) {
   float currentSpeed = getSpeed(dt);
-  float output = pid.compute(targetSpeed, currentSpeed, dt);
+  float output = controller.compute(targetSpeed, currentSpeed, dt);
 
   // Use PID output to drive the motor toward the requested speed
   motor.setSpeed(output);
 }
 
-void MotorController::setOpenLoop(int speed) {
+void MotorController::setOpenLoop(float speed) {
   // Bypass PID and drive the motor directly
   motor.setSpeed(speed);
 }

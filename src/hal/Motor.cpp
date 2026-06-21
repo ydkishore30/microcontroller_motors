@@ -11,27 +11,23 @@ void Motor::begin() {
   ledcAttachPin(pin_lpwm, ch_l);
 }
 
-void Motor::setSpeed(int speed) {
-  speed = constrain(speed, -255, 255);
+void Motor::setSpeed(float speed) {
 
-  int pwm = abs(speed);
+  speed = constrain(speed, -1.0f, 1.0f);
 
-  // STOP condition
-  if (speed == 0) {
+  int pwm = (int)(fabs(speed) * 255.0f);
+
+  if (speed == 0.0f) {
     ledcWrite(ch_r, 0);
     ledcWrite(ch_l, 0);
     return;
   }
 
-  // FORWARD
-  if (speed > 0) {
-    ledcWrite(ch_r, pwm);   // RPWM = forward
+  if (speed < 0.0f) {
+    ledcWrite(ch_r, pwm);
     ledcWrite(ch_l, 0);
-  }
-
-  // BACKWARD
-  else {
+  } else {
     ledcWrite(ch_r, 0);
-    ledcWrite(ch_l, pwm);   // LPWM = reverse
+    ledcWrite(ch_l, pwm);
   }
 }
