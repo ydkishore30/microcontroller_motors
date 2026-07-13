@@ -1,20 +1,23 @@
 #pragma once
 #include <Arduino.h>
+#include "IMotor.h"
 
-class Motor {
+// Driver interface: one PWM (speed) pin + one digital direction pin per
+// motor, matching the SmartElex 15D's Independent PWM Mode (DIP switch
+// 0011). Not a dual-PWM RPWM/LPWM driver.
+class Motor : public IMotor {
 private:
-  int pin_rpwm;
-  int pin_lpwm;
-  int ch_r;
-  int ch_l;
+  int pin_pwm;
+  int pin_dir;
+  int ch_pwm;
 
-  bool inverted = false;   // ✅ ADD THIS
+  bool inverted = false;
 
 public:
-  Motor(int rpwm, int lpwm, int chR, int chL);
+  Motor(int pwmPin, int dirPin, int pwmChannel);
 
   void begin();
-  void setSpeed(int speed);
+  void setSpeed(float speed) override;
 
-  void setInverted(bool inv);  // ✅ ADD THIS
+  void setInverted(bool inv);
 };

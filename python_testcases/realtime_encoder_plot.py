@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from collections import deque
 
 # ---------------- CONFIG ----------------
-PORT = "/dev/ttyUSB0"
+PORT = "/dev/ttyUSB1"
 BAUD = 115200
 
 ser = serial.Serial(PORT, BAUD, timeout=1)

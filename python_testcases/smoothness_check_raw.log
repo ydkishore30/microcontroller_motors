@@ -1,0 +1,19 @@
+CMD L=0.60 R=0.60
+L ticks: 1 | R ticks: 4 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 46 | R ticks: 44 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 139 | R ticks: 134 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 280 | R ticks: 275 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 473 | R ticks: 463 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 710 | R ticks: 700 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 964 | R ticks: 953 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 1223 | R ticks: 1211 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 1486 | R ticks: 1474 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 1755 | R ticks: 1741 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 2029 | R ticks: 2016 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 2306 | R ticks: 2293 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 2592 | R ticks: 2576 | CmdL: 0.60 | CmdR: 0.60 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+CMD L=0.00 R=0.00
+L ticks: 2658 | R ticks: 2645 | CmdL: 0.00 | CmdR: 0.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 2658 | R ticks: 2645 | CmdL: 0.00 | CmdR: 0.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 2658 | R ticks: 2645 | CmdL: 0.00 | CmdR: 0.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
+L ticks: 2658 | R ticks: 2645 | CmdL: 0.00 | CmdR: 0.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00
