@@ -2,9 +2,10 @@
 #define ENCODER_H
 
 #include <Arduino.h>
+#include "IEncoder.h"
 
 // Encoder reads a quadrature encoder and counts tick increments.
-class Encoder {
+class Encoder : public IEncoder {
   int pinA, pinB;
   volatile long ticks = 0;
 
@@ -18,7 +19,7 @@ public:
   void handleA();
 
   // Read the current tick count safely from the main loop.
-  long getTicks();
+  long getTicks() override;
 };
 
 #endif

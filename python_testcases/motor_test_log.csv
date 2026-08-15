@@ -3066,3 +3066,382 @@ TURN RIGHT,2.829256057739258,80,-80,L:-253 R:0
 TURN RIGHT,2.879824638366699,80,-80,L:-254 R:0
 TURN RIGHT,2.930356979370117,80,-80,L:-255 R:0
 TURN RIGHT,2.9809844493865967,80,-80,L:-256 R:0
+LEFT ONLY,time,left_cmd,right_cmd,raw
+LEFT ONLY,1.0010626316070557,80,0,
+LEFT ONLY,2.0519185066223145,80,0,
+LEFT ONLY,3.102861166000366,80,0,
+RIGHT ONLY,time,left_cmd,right_cmd,raw
+RIGHT ONLY,1.0012896060943604,0,80,
+RIGHT ONLY,4.473198890686035,0,80,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+FORWARD,time,left_cmd,right_cmd,raw
+FORWARD,1.000335454940796,80,80,
+FORWARD,2.051342010498047,80,80,
+FORWARD,3.102294683456421,80,80,
+REVERSE,time,left_cmd,right_cmd,raw
+REVERSE,2.4714224338531494,-80,-80,                                                                                                                                                                                                                                                                                             
+REVERSE,20.555975914001465,-80,-80,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+TURN LEFT,time,left_cmd,right_cmd,raw
+TURN LEFT,1.450601577758789,-80,80,                                                                                                          
+TURN LEFT,6.600609302520752,-80,80,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+TURN RIGHT,time,left_cmd,right_cmd,raw
+TURN RIGHT,3.002249002456665,80,-80,                                                                  
+LEFT ONLY,time,left_cmd,right_cmd,raw
+LEFT ONLY,0.0009288787841796875,80,0,m(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.05208468437194824,80,0,[221195][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.10347175598144531,80,0,[221202][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.15436172485351562,80,0,IMU status: OK txStatus=0 requested=14 received=14 available=14
+LEFT ONLY,0.20529723167419434,80,0,[221212][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.25625061988830566,80,0,[221224][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.307445764541626,80,0,[221231][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.35918116569519043,80,0,"L ticks: 0 | R ticks: 0 | CmdL: 0.00 | CmdR: 0.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00"
+LEFT ONLY,0.40961480140686035,80,0,[
+LEFT ONLY,0.461444616317749,80,0,2[222800][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.5120460987091064,80,0,CMD L=1.00 R=0.00
+LEFT ONLY,0.5640969276428223,80,0,[222810][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.615748405456543,80,0,[222817][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.667708158493042,80,0,[222824][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.7197072505950928,80,0,[222833][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.7717711925506592,80,0,[222841][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.8234603404998779,80,0,[222848][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.8752336502075195,80,0,[222857][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.9260125160217285,80,0,[222864][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,0.9768555164337158,80,0,[222872][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.0283539295196533,80,0,[222880][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.079451084136963,80,0,[222888][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.1305561065673828,80,0,[222895][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.1814379692077637,80,0,[222904][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.2324700355529785,80,0,[222911][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.283341407775879,80,0,[222919][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.334407091140747,80,0,[222928][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.3854637145996094,80,0,[222935][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.436279296875,80,0,[222942][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.4873676300048828,80,0,[222951][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.5382378101348877,80,0,[222958][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.5893263816833496,80,0,[222965][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.6403212547302246,80,0,[222974][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.6910817623138428,80,0,[222982][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.7418601512908936,80,0,[222989][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.7930269241333008,80,0,[222998][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.8437552452087402,80,0,[223005][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.894810438156128,80,0,[223012][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.9458913803100586,80,0,[223021][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,1.996652364730835,80,0,[223029][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.04773211479187,80,0,[223036][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.0991389751434326,80,0,[223045][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.150226354598999,80,0,[223052][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.201133966445923,80,0,[223059][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.2521743774414062,80,0,[223068][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.3031160831451416,80,0,[223076][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.354243040084839,80,0,[223083][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.405320882797241,80,0,[223092][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.456026077270508,80,0,[223099][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.5071847438812256,80,0,[223106][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.5576794147491455,80,0,[223115][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.608759641647339,80,0,[223123][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.6595828533172607,80,0,[223130][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.710439443588257,80,0,[223139][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.761564254760742,80,0,[223146][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.8124008178710938,80,0,[223153][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.8643648624420166,80,0,[223162][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.916198492050171,80,0,[223170][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+LEFT ONLY,2.967911720275879,80,0,[223177][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,time,left_cmd,right_cmd,raw
+RIGHT ONLY,0.0012960433959960938,0,80,[223186][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.052431583404541016,0,80,[223193][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.1034708023071289,0,80,[223200][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.15448379516601562,0,80,[223209][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.2055959701538086,0,80,[223217][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.25641632080078125,0,80,[223224][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.30716705322265625,0,80,IMU status: OK txStatus=0 requested=14 received=14 available=14
+RIGHT ONLY,0.3582882881164551,0,80,[223233][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.40972256660461426,0,80,[223246][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Erroe d Error -1
+RIGHT ONLY,0.46103692054748535,0,80,[225768][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.5118153095245361,0,80,[225776][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.5632498264312744,0,80,"L ticks: 0 | R ticks: 0 | CmdL: 1.00 | CmdR: 0.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00"
+RIGHT ONLY,0.6143312454223633,0,80,[225786][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.6653740406036377,0,80,[225801][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.7163217067718506,0,80,[225808][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.7676208019256592,0,80,[225817][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.8185837268829346,0,80,[225825][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.8695418834686279,0,80,[225832][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,0.9199175834655762,0,80,CMD L=0.00 R=0.00
+RIGHT ONLY,0.9709932804107666,0,80,[225841][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.0220623016357422,0,80,[225849][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.0731027126312256,0,80,[225856][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.1242663860321045,0,80,[225865][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.175339698791504,0,80,[225872][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.2263638973236084,0,80,[225880][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.277379035949707,0,80,[225889][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.3284912109375,0,80,[225896][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.3792543411254883,0,80,[225903][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.4301605224609375,0,80,[225912][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.4811415672302246,0,80,[225919][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.5323102474212646,0,80,[225927][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.5832314491271973,0,80,[225936][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.6339390277862549,0,80,[225943][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.684941053390503,0,80,[225950][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.736081838607788,0,80,[225959][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.7870995998382568,0,80,[225966][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.8380334377288818,0,80,[225974][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.889146327972412,0,80,[225983][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.940004825592041,0,80,[225990][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,1.9910590648651123,0,80,[225997][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.042125940322876,0,80,[226006][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.0933525562286377,0,80,[226013][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.1446993350982666,0,80,[226020][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.19610595703125,0,80,[226029][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.2471518516540527,0,80,[226037][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.29819655418396,0,80,[226044][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.3492207527160645,0,80,[226053][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.4003307819366455,0,80,[226060][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.4518632888793945,0,80,[226068][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.5029380321502686,0,80,[226077][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.5539515018463135,0,80,[226084][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.604959487915039,0,80,[226091][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.656038761138916,0,80,[226100][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.707136631011963,0,80,[226107][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.7581632137298584,0,80,[226115][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.8097493648529053,0,80,[226124][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.860703468322754,0,80,[226131][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.9115829467773438,0,80,[226138][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+RIGHT ONLY,2.9622106552124023,0,80,[226147][E][Wire.ReadNonStop returned Error -1
+FORWARD,time,left_cmd,right_cmd,raw
+FORWARD,0.0005478858947753906,80,80,[230274][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.05124950408935547,80,80,[230283][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.10225391387939453,80,80,[230290][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.15332651138305664,80,80,[230297][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.20424628257751465,80,80,IMU status: OK txStatus=0 requested=14 received=14 available=14
+FORWARD,0.25528931617736816,80,80,[230306][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.3064863681793213,80,80,[230319][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.356917142868042,80,80,[230326][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.40747547149658203,80,80,"L ticks: 0 | R ticks: 0 | CmdL: 0.00 | CmdR: 1.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00"
+FORWARD,0.45807814598083496,80,80,[230336][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.5089395046234131,80,80,[230351][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.5600581169128418,80,80,[230359][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.6112008094787598,80,80,[230368][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.6623072624206543,80,80,[230375][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.7134099006652832,80,80,[230382][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.7643539905548096,80,80,[230391][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.8154141902923584,80,80,[230399][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.8664910793304443,80,80,[230406][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.9174726009368896,80,80,[230415][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,0.9684443473815918,80,80,[230422][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.0192348957061768,80,80,[230429][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.0701072216033936,80,80,[230438][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.1211378574371338,80,80,[230445][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.1732242107391357,80,80,[230453][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.2249364852905273,80,80,[230462][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.276414394378662,80,80,[230469][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.3273561000823975,80,80,[230476][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.3780477046966553,80,80,[230485][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.4289171695709229,80,80,[230493][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.4800775051116943,80,80,[230500][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.531327724456787,80,80,[230509][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.5824358463287354,80,80,[230516][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.6335463523864746,80,80,[230523][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.6845412254333496,80,80,[230532][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.7354414463043213,80,80,[230540][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.7865030765533447,80,80,[230547][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.8373160362243652,80,80,[230556][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.88832426071167,80,80,[230563][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.939457893371582,80,80,[230570][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,1.9912099838256836,80,80,[230579][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.042684555053711,80,80,[230586][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.094461679458618,80,80,[230594][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.1458349227905273,80,80,[230603][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.196946382522583,80,80,[230610][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.2478952407836914,80,80,[230617][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.299391508102417,80,80,[230626][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.3507137298583984,80,80,[230634][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.402366876602173,80,80,[230641][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.453089952468872,80,80,[230650][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.5041682720184326,80,80,[230657][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.555133104324341,80,80,[230664][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.6060540676116943,80,80,[230673][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.657243251800537,80,80,[230680][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.7081775665283203,80,80,[230688][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.7590880393981934,80,80,[230697][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1u
+FORWARD,2.809506416320801,80,80,rned Error -1
+FORWARD,2.860341787338257,80,80,[235133][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.911529302597046,80,80,[235140][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+FORWARD,2.962392568588257,80,80,[235149][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,time,left_cmd,right_cmd,raw
+REVERSE,0.0008640289306640625,-80,-80,[235156][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.05191993713378906,-80,-80,[235163][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.1029214859008789,-80,-80,[235172][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.153611421585083,-80,-80,[235180][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.2046041488647461,-80,-80,[235187][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.25557518005371094,-80,-80,[235196][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.30658435821533203,-80,-80,[235203][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.35774993896484375,-80,-80,[235210][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.40877795219421387,-80,-80,[235219][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.4595935344696045,-80,-80,[235226][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.510657787322998,-80,-80,[235234][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.5616888999938965,-80,-80,[235243][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.6127231121063232,-80,-80,[235250][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.6648807525634766,-80,-80,[235257][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.7166242599487305,-80,-80,[235266][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.7680485248565674,-80,-80,[235274][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.819098949432373,-80,-80,[235281][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.8702681064605713,-80,-80,[235290][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.9212872982025146,-80,-80,[235297][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,0.9723141193389893,-80,-80,[235304][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.0234084129333496,-80,-80,[235313][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.0743451118469238,-80,-80,[235320][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.1253588199615479,-80,-80,[235328][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.1764442920684814,-80,-80,[235337][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.227407455444336,-80,-80,[235344][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.278430461883545,-80,-80,[235351][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.329524040222168,-80,-80,IMU status: OK txStatus=0 requested=14 received=14 available=14
+REVERSE,1.3805935382843018,-80,-80,[235360][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.4317152500152588,-80,-80,[235373][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.4827735424041748,-80,-80,[235380][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.5347590446472168,-80,-80,"L ticks: 0 | R ticks: 0 | CmdL: 1.00 | CmdR: 1.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00"
+REVERSE,1.5857436656951904,-80,-80,[235390][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.637087345123291,-80,-80,[235405][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.6879777908325195,-80,-80,[235413][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.7389898300170898,-80,-80,[235422][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.7903361320495605,-80,-80,[235429][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.841245174407959,-80,-80,[235436][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.8921289443969727,-80,-80,[235445][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.942854404449463,-80,-80,[235453][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,1.9939384460449219,-80,-80,[235460][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.0448694229125977,-80,-80,[235469][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.09605073928833,-80,-80,[235476][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.1474900245666504,-80,-80,[235483][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.1984405517578125,-80,-80,[235492][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.2493903636932373,-80,-80,[235499][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.3005099296569824,-80,-80,[235507][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.351654052734375,-80,-80,[235516][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.4027464389801025,-80,-80,[235523][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.4535911083221436,-80,-80,[235530][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.5044007301330566,-80,-80,[235539][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.555507183074951,-80,-80,[235546][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.60634446144104,-80,-80,[235554][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.6572389602661133,-80,-80,[235563][E][Wire.cpp:499]Wrire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.708378314971924,-80,-80,[239999][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.7593576908111572,-80,-80,[240006][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.8106777667999268,-80,-80,[240015][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.8617842197418213,-80,-80,[240022][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.9133098125457764,-80,-80,[240029][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+REVERSE,2.964439630508423,-80,-80,[240038][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,time,left_cmd,right_cmd,raw
+TURN LEFT,0.0008978843688964844,-80,80,[240046][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.05209708213806152,-80,80,[240053][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.10318756103515625,-80,80,[240062][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.15390634536743164,-80,80,[240069][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.20497989654541016,-80,80,[240076][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.25594234466552734,-80,80,[240085][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.3072035312652588,-80,80,[240093][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.3579826354980469,-80,80,[240100][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.4087848663330078,-80,80,[240109][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.4598510265350342,-80,80,[240116][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.5108363628387451,-80,80,[240123][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.5619070529937744,-80,80,[240132][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.6128644943237305,-80,80,[240140][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.6635520458221436,-80,80,[240147][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.7144901752471924,-80,80,[240156][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.7655320167541504,-80,80,[240163][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.8162529468536377,-80,80,[240170][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.8669853210449219,-80,80,[240179][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.9178152084350586,-80,80,[240187][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,0.9688293933868408,-80,80,[240194][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.019599199295044,-80,80,[240203][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.0706613063812256,-80,80,[240210][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.1214265823364258,-80,80,[240217][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.1725122928619385,-80,80,[240226][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.2235095500946045,-80,80,[240234][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.2746293544769287,-80,80,[240241][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.3254292011260986,-80,80,[240250][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.3764145374298096,-80,80,[240257][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.4272868633270264,-80,80,[240264][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.4783692359924316,-80,80,[240273][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.5292630195617676,-80,80,[240281][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.5804598331451416,-80,80,[240288][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.6315178871154785,-80,80,[240297][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.6827380657196045,-80,80,[240304][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.7336673736572266,-80,80,[240311][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.7843360900878906,-80,80,[240320][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.8355026245117188,-80,80,[240328][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.886598825454712,-80,80,[240335][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.937727451324463,-80,80,[240344][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,1.9895763397216797,-80,80,[240351][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.0416111946105957,-80,80,[240358][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.093552350997925,-80,80,[240367][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.1450653076171875,-80,80,[240374][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.196071147918701,-80,80,[240382][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.2471771240234375,-80,80,[240391][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.29826283454895,-80,80,[240398][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.3493130207061768,-80,80,[240405][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.4001173973083496,-80,80,IMU status: OK txStatus=0 requested=14 received=14 available=14
+TURN LEFT,2.45097017288208,-80,80,[240415][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1E
+TURN LEFT,2.501970052719116,-80,80,][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.553039312362671,-80,80,[244855][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.6041312217712402,-80,80,[244862][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.65533447265625,-80,80,[244871][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.7063212394714355,-80,80,[244879][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.7575151920318604,-80,80,[244886][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.808626174926758,-80,80,[244895][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.859853744506836,-80,80,[244902][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.9109160900115967,-80,80,[244909][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN LEFT,2.962021589279175,-80,80,[244918][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,time,left_cmd,right_cmd,raw
+TURN RIGHT,0.0007929801940917969,80,-80,[244926][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.05189847946166992,80,-80,[244933][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.10260558128356934,80,-80,[244942][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.15338850021362305,80,-80,[244949][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.20426130294799805,80,-80,[244956][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.255415678024292,80,-80,[244965][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.3064689636230469,80,-80,[244973][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.35712122917175293,80,-80,[244980][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.4088444709777832,80,-80,"L ticks: 0 | R ticks: 0 | CmdL: -1.00 | CmdR: 1.00 | Accel: 0.00,0.00,0.00 | Gyro: 0.00,0.00,0.00 | Bus V: 0.00 | Current: 0.00"
+TURN RIGHT,0.4599335193634033,80,-80,[244990][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.5107386112213135,80,-80,[245005][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.5614902973175049,80,-80,[245013][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.6122257709503174,80,-80,[245022][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.6633968353271484,80,-80,[245029][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.7146456241607666,80,-80,[245036][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.7655346393585205,80,-80,[245045][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.8172063827514648,80,-80,[245052][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.8684751987457275,80,-80,[245060][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.9195523262023926,80,-80,[245069][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,0.9703724384307861,80,-80,[245076][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.0215513706207275,80,-80,[245083][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.0727617740631104,80,-80,[245092][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.1237008571624756,80,-80,[245099][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.174854040145874,80,-80,[245107][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.2258520126342773,80,-80,[245115][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.2770071029663086,80,-80,[245123][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.3280854225158691,80,-80,[245130][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.3788716793060303,80,-80,[245139][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.4297516345977783,80,-80,[245146][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.480724573135376,80,-80,[245154][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.5318045616149902,80,-80,[245163][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.5830004215240479,80,-80,[245170][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.6340813636779785,80,-80,[245177][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.6850676536560059,80,-80,[245186][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.7359001636505127,80,-80,[245193][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.786991834640503,80,-80,[245200][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.8381681442260742,80,-80,[245210][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.8889412879943848,80,-80,[245217][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.9397776126861572,80,-80,[245224][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,1.990753412246704,80,-80,[245233][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.041874647140503,80,-80,[245240][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.0926930904388428,80,-80,[245248][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.1440823078155518,80,-80,[245256][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.1949660778045654,80,-80,[245264][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.245924472808838,80,-80,[245271][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.2966227531433105,80,-80,[245280][E][Wire.cpp:499] requestFrom(): i2cWrirened Error -1
+TURN RIGHT,2.347398042678833,80,-80,[249714][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.3983452320098877,80,-80,[249721][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.4494242668151855,80,-80,[249728][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.5003249645233154,80,-80,[249737][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.5513386726379395,80,-80,[249745][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.602187156677246,80,-80,[249752][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.6533288955688477,80,-80,[249761][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.7044107913970947,80,-80,[249768][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.7559664249420166,80,-80,[249775][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.8071706295013428,80,-80,[249784][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.8579118251800537,80,-80,[249792][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.908625364303589,80,-80,[249799][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
+TURN RIGHT,2.9598629474639893,80,-80,[249808][E][Wire.cpp:499] requestFrom(): i2cWriteReadNonStop returned Error -1
