@@ -16,6 +16,19 @@ void MotorController::update(float targetSpeed, float dt) {
   float currentSpeed = getSpeed(dt);
   float output = controller.compute(targetSpeed, currentSpeed, dt);
 
+  // Never let the wheel visibly reverse against a nonzero commanded
+  // direction. Early in a ramp (tiny target, low/noisy tick counts) the
+  // PID math can transiently compute a wrong-sign output - bounded and
+  // self-correcting internally, but still a real, undesirable physical
+  // jerk on the robot. Clamping here removes that jerk at the one place
+  // it actually matters (what reaches the motor) without touching the
+  // PID's own internal state/math.
+  if (targetSpeed > 0.0f && output < 0.0f) {
+    output = 0.0f;
+  } else if (targetSpeed < 0.0f && output > 0.0f) {
+    output = 0.0f;
+  }
+
   // Use PID output to drive the motor toward the requested speed
   motor.setSpeed(output);
 }

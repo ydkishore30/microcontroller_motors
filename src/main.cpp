@@ -49,16 +49,16 @@ void IRAM_ATTR isrRight() {
   rightEncoder.handleA();
 }
 
-// Pure-P (kp=0.0003) confirmed stable: no sustained oscillation, just a
-// brief settle-in blip at the very start of a ramp (tick-quantization
-// noise, not a tuning problem). ki=0.00003 was tried on top of this and
-// made the startup jerk worse, not better - integral winds up while the
-// wheel is still stuck by static friction at a tiny ramped-up target
-// (see the windup-cap comment in PID.cpp), then dumps that accumulated
-// correction all at once the moment the wheel breaks free. Reverted to
-// pure-P until that's addressed with a tighter windup cap.
-PID leftPid(0.0003, 0.000, 0.0000);
-PID rightPid(0.0003, 0.000, 0.0000);
+// Pure-P (kp=0.0003) settles far below the commanded target (~32 RPM
+// actual vs ~80 RPM target at full command) - that's not a display
+// issue, it's inherent to P-only control: the wheel settles wherever
+// kp*error balances against friction, which sits well under target no
+// matter how long you wait. ki is required to close that gap. It does
+// reintroduce a brief startup jerk from integral windup during stiction
+// (see PID.cpp) but that jerk is cosmetic and already confirmed
+// acceptable, while the steady-state shortfall is not.
+PID leftPid(0.0003, 0.0001, 0.0000);
+PID rightPid(0.0003, 0.0001, 0.0000);
 
 
 
