@@ -19,9 +19,12 @@ bool MPU6050::begin() {
   Wire.requestFrom(address, (uint8_t)1);
   if (Wire.available() != 1) return false;
 
-  // WHO_AM_I reports the device address with bit 0 reserved.
+  // WHO_AM_I reports the device address with bit 0 reserved. 0x68 is
+  // MPU6050; 0x70 is MPU6500 - register-compatible for the PWR_MGMT_1/
+  // ACCEL/GYRO registers this driver uses, so both are accepted.
   uint8_t whoAmI = Wire.read();
-  if ((whoAmI & 0x7E) != 0x68) return false;
+  uint8_t whoAmIMasked = whoAmI & 0x7E;
+  if (whoAmIMasked != 0x68 && whoAmIMasked != 0x70) return false;
 
   if (!writeRegister(REG_PWR_MGMT_1, 0x00)) return false; // wake up device
 

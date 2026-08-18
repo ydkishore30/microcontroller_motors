@@ -49,10 +49,16 @@ void IRAM_ATTR isrRight() {
   rightEncoder.handleA();
 }
 
-// Step-by-step tuning: isolating P first. ki=kd=0 so we can measure the
-// pure-P response (rise time, steady-state error) before adding any I.
-PID leftPid(0.001, 0.000, 0.0001);
-PID rightPid(0.001, 0.000, 0.0001);
+// Pure-P (kp=0.0003) confirmed stable: no sustained oscillation, just a
+// brief settle-in blip at the very start of a ramp (tick-quantization
+// noise, not a tuning problem). ki=0.00003 was tried on top of this and
+// made the startup jerk worse, not better - integral winds up while the
+// wheel is still stuck by static friction at a tiny ramped-up target
+// (see the windup-cap comment in PID.cpp), then dumps that accumulated
+// correction all at once the moment the wheel breaks free. Reverted to
+// pure-P until that's addressed with a tighter windup cap.
+PID leftPid(0.0003, 0.000, 0.0000);
+PID rightPid(0.0003, 0.000, 0.0000);
 
 
 
@@ -68,7 +74,7 @@ MicroRosNode microRosNode(1);  // 1 executor slot: the /wheel_cmd subscription
 MicroRosCommandSource concreteCommandSource(microRosNode);
 MicroRosTelemetryPublisher concreteTelemetryPublisher(microRosNode);
 #else
-SerialCommandSource concreteCommandSource;
+SerialCommandSource concreteCommandSource(leftEncoder, rightEncoder);
 SerialTelemetryPublisher concreteTelemetryPublisher;
 #endif
 
@@ -219,8 +225,15 @@ void loop() {
   // TELEMETRY
   // ==========================
 
+#ifdef USE_MICRO_ROS
+  // Under plain Serial, telemetry is pulled on-demand via SerialCommandSource's
+  // "E"/"R" query-response (matching my_hardware.cpp) - an unprompted publish
+  // here would inject an extra line between a query and its reply and desync
+  // ros2_control's line-timeout read. Micro-ROS publishes over its own
+  // transport, so no such conflict there.
   telemetryPublisher.publish(
     leftEncoder.getTicks(), rightEncoder.getTicks(),
     commandSource.getLeftCommand(), commandSource.getRightCommand(),
     imu, currentSensor);
+#endif
 }

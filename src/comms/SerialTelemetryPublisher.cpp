@@ -25,5 +25,25 @@ void SerialTelemetryPublisher::publish(long leftTicks, long rightTicks,
   Serial.print(",");
   Serial.print(leftVel);
   Serial.print(",");
-  Serial.println(rightVel);
+  Serial.print(rightVel);
+
+  // Trailing columns beyond the first 4 - ros2_control's CSV parser
+  // (my_hardware.cpp) only reads indices 0-3, so these are ignored there
+  // and just give visibility for manual serial monitoring.
+  Serial.print(",");
+  Serial.print(imu.getAccelX());
+  Serial.print(",");
+  Serial.print(imu.getAccelY());
+  Serial.print(",");
+  Serial.print(imu.getAccelZ());
+  Serial.print(",");
+  Serial.print(imu.getGyroX());
+  Serial.print(",");
+  Serial.print(imu.getGyroY());
+  Serial.print(",");
+  Serial.print(imu.getGyroZ());
+  Serial.print(",");
+  Serial.print(currentSensor.getBusVoltage());
+  Serial.print(",");
+  Serial.println(currentSensor.getCurrent());
 }

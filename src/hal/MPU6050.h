@@ -4,7 +4,9 @@
 #include "IImuSensor.h"
 
 // MPU6050 reads accelerometer, gyroscope and temperature data over I2C
-// at the sensor's default +-2g / +-250 deg/s sensitivity ranges.
+// at the sensor's default +-2g / +-250 deg/s sensitivity ranges. Also
+// accepts an MPU6500 (WHO_AM_I 0x70) - register-compatible with the
+// MPU6050 for the registers this driver uses.
 class MPU6050 : public IImuSensor {
 public:
   static const uint8_t DEFAULT_ADDRESS = 0x68;

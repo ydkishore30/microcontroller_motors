@@ -8,11 +8,10 @@
 // over Serial and stored in flash (see RuntimeConfig.h), so they never
 // end up in source code or git history.
 
-// --- I2C sensors (MPU6050 + INA226) ---
-// Both currently read all-zero / fail their I2C transactions (suspected
-// dead chips), and the failed reads spam Serial with error lines that
-// drown out motor telemetry. Set to 1 once the hardware is replaced and
-// verified working.
+// --- I2C sensors (MPU6500 + INA226) ---
+// Wired to the ESP32's SDA/SCL pins (see I2C_SDA/I2C_SCL in main.cpp).
+// Disabled for now - deploying motor control alone while the I2C bus
+// issue is debugged separately.
 #define ENABLE_I2C_SENSORS 0
 
 // Match the shunt resistor actually fitted on your current sensor board.
@@ -25,7 +24,10 @@
 //     derived from the command, using encoder feedback). Disabled (not
 //     removed) for now - the PID/MotorController::update() code below
 //     is untouched and still fully usable, just not currently called.
-#define USE_CLOSED_LOOP_PID 0
+#define USE_CLOSED_LOOP_PID 1
+
+// Encoder resolution, used to convert raw ticks to revolutions/RPM.
+#define ENCODER_TICKS_PER_REV 1260.0f
 
 // --- Closed-loop velocity control ---
 // Motor is rated 100 RPM; measured open-loop ceiling was ~94 RPM (see
@@ -41,6 +43,9 @@
 // Maximum allowed change in target speed per second. The PID target is
 // ramped at this rate instead of jumping instantly to the commanded
 // speed, so acceleration is smooth regardless of PID tuning. At this
-// rate, going from 0 to full speed takes ~4.3s. Lowered from 500 for
-// extra smoothness on startup.
-#define MAX_ACCEL_TICKS_PER_SEC2 300.0f
+// rate, going from 0 to full speed takes ~2.1s. Raised from 300 so the
+// ramped target climbs past encoder tick-quantization noise faster,
+// shrinking the brief reverse-direction jerk seen at the start of a
+// command (noisy low-tick-count speed readings can momentarily exceed
+// a still-tiny target early in the ramp).
+#define MAX_ACCEL_TICKS_PER_SEC2 600.0f
