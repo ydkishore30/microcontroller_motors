@@ -24,7 +24,7 @@
 //     derived from the command, using encoder feedback). Disabled (not
 //     removed) for now - the PID/MotorController::update() code below
 //     is untouched and still fully usable, just not currently called.
-#define USE_CLOSED_LOOP_PID 1
+#define USE_CLOSED_LOOP_PID 0
 
 // Encoder resolution, used to convert raw ticks to revolutions/RPM.
 #define ENCODER_TICKS_PER_REV 1260.0f
