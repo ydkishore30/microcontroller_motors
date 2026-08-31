@@ -11,8 +11,8 @@
 #define R_PWM 27
 #define R_DIR 14
 
-Motor leftMotor(L_PWM, L_DIR, 0);
-Motor rightMotor(R_PWM, R_DIR, 1);
+Motor leftMotor(L_PWM, L_DIR);
+Motor rightMotor(R_PWM, R_DIR);
 
 void setup() {
   Serial.begin(115200);

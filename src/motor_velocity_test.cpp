@@ -20,8 +20,8 @@
 #define ENC_R_A 18
 #define ENC_R_B 19
 
-Motor leftMotor(L_PWM, L_DIR, 0);
-Motor rightMotor(R_PWM, R_DIR, 1);
+Motor leftMotor(L_PWM, L_DIR);
+Motor rightMotor(R_PWM, R_DIR);
 
 Encoder leftEncoder(ENC_L_A, ENC_L_B);
 Encoder rightEncoder(ENC_R_A, ENC_R_B);
