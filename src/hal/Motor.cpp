@@ -1,7 +1,7 @@
 #include "Motor.h"
 
-Motor::Motor(int pwmPin, int dirPin)
-  : driver(PWM_DIR, pwmPin, dirPin) {}
+Motor::Motor(int pinA, int pinB)
+  : driver(PWM_PWM, pinA, pinB) {}
 
 void Motor::begin() {
   // CytronMD's constructor already configures both pins - nothing else

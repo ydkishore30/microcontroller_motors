@@ -19,15 +19,16 @@
 #include "comms/SerialTelemetryPublisher.h"
 #endif
 
-// LEFT MOTOR (Cytron MDD3A PWM/DIR mode: PWM = speed, DIR = direction)
-#define L_PWM 27
-#define L_DIR 14
+// LEFT MOTOR (Cytron MDD3A PWM_PWM mode: no dedicated direction pin -
+// PIN_A drives forward, PIN_B drives backward, only one active at a time)
+#define L_PIN_A 27
+#define L_PIN_B 14
 #define ENC_L_A 34
 #define ENC_L_B 35
 
 // RIGHT MOTOR
-#define R_PWM 25
-#define R_DIR 26
+#define R_PIN_A 25
+#define R_PIN_B 26
 #define ENC_R_A 32
 #define ENC_R_B 33
 
@@ -35,8 +36,8 @@
 #define I2C_SDA 21
 #define I2C_SCL 22
 
-Motor leftMotor(L_PWM, L_DIR);
-Motor rightMotor(R_PWM, R_DIR);
+Motor leftMotor(L_PIN_A, L_PIN_B);
+Motor rightMotor(R_PIN_A, R_PIN_B);
 
 Encoder leftEncoder(ENC_L_A, ENC_L_B);
 Encoder rightEncoder(ENC_R_A, ENC_R_B);
