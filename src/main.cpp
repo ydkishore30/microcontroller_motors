@@ -108,11 +108,6 @@ void setup() {
   leftMotor.begin();
   rightMotor.begin();
 
-  // Left motor is physically mounted/wired mirrored relative to the
-  // right one, so a "forward" command spins it the wrong way - flip it
-  // in software rather than re-wiring.
-  leftMotor.setInverted(true);
-
   leftEncoder.begin(isrLeft);
   rightEncoder.begin(isrRight);
 
