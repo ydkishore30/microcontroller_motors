@@ -29,10 +29,13 @@
 // realigns each controller's command and feedback to the same physical
 // wheel; it may leave the L/R software labels flipped relative to the
 // robot's true physical sides, which needs a physical check separately.
+// ENC_L_A/B also swapped from the physical A/B wiring order, same as
+// the right channel below - a positive command was reading as ~-100
+// RPM (saturated wrong-sign), never converging.
 #define L_PIN_A 27
 #define L_PIN_B 14
-#define ENC_L_A 32
-#define ENC_L_B 33
+#define ENC_L_A 33
+#define ENC_L_B 32
 
 // RIGHT MOTOR
 // ENC_R_A/B swapped from the physical A/B wiring order: a positive
@@ -72,8 +75,8 @@ void IRAM_ATTR isrRight() {
 // reintroduce a brief startup jerk from integral windup during stiction
 // (see PID.cpp) but that jerk is cosmetic and already confirmed
 // acceptable, while the steady-state shortfall is not.
-PID leftPid(0.0003, 0.0001, 0.0000);
-PID rightPid(0.0003, 0.0001, 0.0000);
+PID leftPid(0.0008, 0.0004, 0.0000);
+PID rightPid(0.0008, 0.0004, 0.0000);
 
 
 
