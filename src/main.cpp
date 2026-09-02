@@ -21,16 +21,30 @@
 
 // LEFT MOTOR (Cytron MDD3A PWM_PWM mode: no dedicated direction pin -
 // PIN_A drives forward, PIN_B drives backward, only one active at a time)
+// Encoder pins swapped with RIGHT MOTOR's below: physical wiring has the
+// two encoders (or two motors - can't tell which from telemetry alone)
+// crossed between channels, which left each PID with no valid feedback
+// for the motor it was actually driving, causing unbounded windup/
+// runaway on whichever channel got a nonzero command. This swap
+// realigns each controller's command and feedback to the same physical
+// wheel; it may leave the L/R software labels flipped relative to the
+// robot's true physical sides, which needs a physical check separately.
 #define L_PIN_A 27
 #define L_PIN_B 14
-#define ENC_L_A 34
-#define ENC_L_B 35
+#define ENC_L_A 32
+#define ENC_L_B 33
 
 // RIGHT MOTOR
+// ENC_R_A/B swapped from the physical A/B wiring order: a positive
+// command was reading as negative RPM, which corrupts PID's error
+// calculation (feedback appears to always be far below target,
+// regardless of true speed) and prevented it from ever converging.
+// Swapping which pin the quadrature logic treats as "A" vs "B" flips
+// the counted direction sign for this channel.
 #define R_PIN_A 25
 #define R_PIN_B 26
-#define ENC_R_A 32
-#define ENC_R_B 33
+#define ENC_R_A 35
+#define ENC_R_B 34
 
 // I2C bus (shared by MPU6050 and INA226)
 #define I2C_SDA 21
