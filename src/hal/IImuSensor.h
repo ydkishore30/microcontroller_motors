@@ -20,4 +20,10 @@ public:
   virtual float getGyroZ() const = 0;
 
   virtual float getTemperature() const = 0; // deg C
+
+  // Fused orientation in degrees. Only sensors with onboard fusion (e.g.
+  // BNO055) provide it; others report 0.
+  virtual float getHeading() const { return 0.0f; }
+  virtual float getRoll() const { return 0.0f; }
+  virtual float getPitch() const { return 0.0f; }
 };

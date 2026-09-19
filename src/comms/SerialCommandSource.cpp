@@ -1,12 +1,12 @@
 #include "SerialCommandSource.h"
 #include "../Config.h"
 
-SerialCommandSource::SerialCommandSource(IEncoder& leftEncoder, IEncoder& rightEncoder)
-  : leftEncoder(leftEncoder), rightEncoder(rightEncoder) {}
+SerialCommandSource::SerialCommandSource(IEncoder& leftEncoder, IEncoder& rightEncoder, IImuSensor& imu)
+  : leftEncoder(leftEncoder), rightEncoder(rightEncoder), imu(imu) {}
 
 void SerialCommandSource::begin() {
   Serial.println("READY");
-  Serial.println("Format: leftSpeed rightSpeed | E (encoder ticks) | R (RPM) | C (last command)");
+  Serial.println("Format: leftSpeed rightSpeed | E (ticks) | R (RPM) | I (IMU) | O (orientation) | C (last command)");
   Serial.println("Example: 100 100");
 }
 
@@ -40,6 +40,37 @@ void SerialCommandSource::handleLine(const String& line) {
     Serial.print(leftRPM, 2);
     Serial.print(" ");
     Serial.println(rightRPM, 2);
+    return;
+  }
+
+  // "I" (IMU) is manual-testing/future use, not currently read by
+  // my_hardware.cpp. Reads main.cpp's already-refreshed cached values
+  // rather than calling imu.update() itself.
+  if (line == "I") {
+    Serial.print("I ");
+    Serial.print(imu.getAccelX(), 3);
+    Serial.print(" ");
+    Serial.print(imu.getAccelY(), 3);
+    Serial.print(" ");
+    Serial.print(imu.getAccelZ(), 3);
+    Serial.print(" ");
+    Serial.print(imu.getGyroX(), 3);
+    Serial.print(" ");
+    Serial.print(imu.getGyroY(), 3);
+    Serial.print(" ");
+    Serial.println(imu.getGyroZ(), 3);
+    return;
+  }
+
+  // "O" (orientation): fused heading/roll/pitch in degrees. Zeros unless
+  // the IMU has onboard fusion (BNO055).
+  if (line == "O") {
+    Serial.print("O ");
+    Serial.print(imu.getHeading(), 2);
+    Serial.print(" ");
+    Serial.print(imu.getRoll(), 2);
+    Serial.print(" ");
+    Serial.println(imu.getPitch(), 2);
     return;
   }
 

@@ -1,6 +1,6 @@
 #include "hal/Motor.h"
 #include "hal/Encoder.h"
-#include "hal/MPU6050.h"
+#include "hal/BNO055.h"
 #include "hal/INA226.h"
 #include "hal/I2CBusRecovery.h"
 #include "control/MotorController.h"
@@ -49,7 +49,7 @@
 #define ENC_R_A 35
 #define ENC_R_B 34
 
-// I2C bus (shared by MPU6050 and INA226)
+// I2C bus (shared by BNO055 and INA226)
 #define I2C_SDA 21
 #define I2C_SCL 22
 
@@ -83,8 +83,14 @@ PID rightPid(0.0008, 0.0004, 0.0000);
 MotorController leftController(leftMotor, leftEncoder, leftPid);
 MotorController rightController(rightMotor, rightEncoder, rightPid);
 
-MPU6050 imu;
+BNO055 imu;
 INA226 currentSensor;
+
+// Only sensors that answered at boot get polled - polling an absent one
+// fails on every cycle, and the Wire driver logs each failure to Serial,
+// which would corrupt the E/R/I query-response protocol.
+bool imuOk = false;
+bool currentSensorOk = false;
 
 #ifdef USE_MICRO_ROS
 MicroRosSerialTransport microRosTransport;
@@ -92,7 +98,7 @@ MicroRosNode microRosNode(1);  // 1 executor slot: the /wheel_cmd subscription
 MicroRosCommandSource concreteCommandSource(microRosNode);
 MicroRosTelemetryPublisher concreteTelemetryPublisher(microRosNode);
 #else
-SerialCommandSource concreteCommandSource(leftEncoder, rightEncoder);
+SerialCommandSource concreteCommandSource(leftEncoder, rightEncoder, imu);
 SerialTelemetryPublisher concreteTelemetryPublisher;
 #endif
 
@@ -131,15 +137,18 @@ void setup() {
 
 #if ENABLE_I2C_SENSORS
   recoverI2CBus(I2C_SDA, I2C_SCL);
-  Wire.begin();
+  Wire.begin(I2C_SDA, I2C_SCL);
+  Wire.setClock(100000);
 
-  if (!imu.begin()) {
+  imuOk = imu.begin();
+  if (!imuOk) {
 #ifndef USE_MICRO_ROS
     Serial.println("IMU init failed");
 #endif
   }
 
-  if (!currentSensor.begin(SHUNT_RESISTOR_OHMS, MAX_EXPECTED_CURRENT_A)) {
+  currentSensorOk = currentSensor.begin(SHUNT_RESISTOR_OHMS, MAX_EXPECTED_CURRENT_A);
+  if (!currentSensorOk) {
 #ifndef USE_MICRO_ROS
     Serial.println("Current sensor init failed");
 #endif
@@ -235,8 +244,17 @@ void loop() {
   // ==========================
 
 #if ENABLE_I2C_SENSORS
-  imu.update();
-  currentSensor.update();
+  // Throttled: unthrottled I2C polling here was hammering the bus on
+  // every loop() iteration (~130Hz, every ~7.5ms) - each failed
+  // transaction still costs a full bus-timeout stall, so retrying that
+  // fast just multiplies error volume without helping a marginal bus.
+  const unsigned long I2C_POLL_INTERVAL_MS = 50;
+  static unsigned long lastI2CPoll = 0;
+  if (now - lastI2CPoll >= I2C_POLL_INTERVAL_MS) {
+    lastI2CPoll = now;
+    if (imuOk) imu.update();
+    if (currentSensorOk) currentSensor.update();
+  }
 #endif
 
   // ==========================

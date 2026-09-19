@@ -8,11 +8,13 @@
 // over Serial and stored in flash (see RuntimeConfig.h), so they never
 // end up in source code or git history.
 
-// --- I2C sensors (MPU6500 + INA226) ---
+// --- I2C sensors (BNO055 + INA226) ---
 // Wired to the ESP32's SDA/SCL pins (see I2C_SDA/I2C_SCL in main.cpp).
-// Disabled for now - deploying motor control alone while the I2C bus
-// issue is debugged separately.
-#define ENABLE_I2C_SENSORS 0
+// MPU6500 physically connected - MPU6050.cpp already accepts its
+// WHO_AM_I (0x70) alongside the MPU6050's (0x68). If INA226 isn't
+// actually wired, its own begin() check fails independently and just
+// logs "Current sensor init failed" without blocking the IMU.
+#define ENABLE_I2C_SENSORS 1
 
 // Match the shunt resistor actually fitted on your current sensor board.
 #define SHUNT_RESISTOR_OHMS 0.1f
