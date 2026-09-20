@@ -10,10 +10,10 @@
 
 // --- I2C sensors (BNO055 + INA226) ---
 // Wired to the ESP32's SDA/SCL pins (see I2C_SDA/I2C_SCL in main.cpp).
-// MPU6500 physically connected - MPU6050.cpp already accepts its
-// WHO_AM_I (0x70) alongside the MPU6050's (0x68). If INA226 isn't
-// actually wired, its own begin() check fails independently and just
-// logs "Current sensor init failed" without blocking the IMU.
+// main.cpp only polls a sensor once it has initialised successfully, so
+// if INA226 isn't actually wired, its own begin() check fails
+// independently and just logs "Current sensor init failed" once at
+// boot without blocking the IMU or spamming the serial log.
 #define ENABLE_I2C_SENSORS 1
 
 // Match the shunt resistor actually fitted on your current sensor board.
